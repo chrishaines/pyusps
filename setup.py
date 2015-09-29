@@ -4,8 +4,8 @@ import os
 
 EXTRAS_REQUIRES = dict(
     test=[
-        'fudge>=1.0.3',
         'nose>=1.1.2',
+        'requests-mock>=0.6.0',
         ],
     dev=[
         'ipython>=0.12.1',
@@ -36,6 +36,7 @@ setup(
         'setuptools>=0.6c11',
         'lxml>=2.3.3',
         'ordereddict==1.1',
+        'requests>=2.0,<3.0'
         ],
     extras_require=EXTRAS_REQUIRES,
     classifiers=[
