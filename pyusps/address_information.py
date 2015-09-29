@@ -7,8 +7,8 @@ try:
 except ImportError:
     from ordereddict import OrderedDict
 
-api_url = 'http://production.shippingapis.com/ShippingAPI.dll'
-address_max = 5
+API_URL = 'http://production.shippingapis.com/ShippingAPI.dll'
+MAX_ADDRESSES = 5
 
 
 def _find_error(root):
@@ -106,8 +106,7 @@ def _get_response(xml):
             ('XML', etree.tostring(xml)),
             ])
 
-    r = requests.get(api_url, params=params)
-    print 'content', r.content
+    r = requests.get(API_URL, params=params)
 
     return etree.parse(StringIO(r.content))
 
@@ -115,13 +114,13 @@ def _get_response(xml):
 def _create_xml(user_id, *args):
     root = etree.Element('AddressValidateRequest', USERID=user_id)
 
-    if len(args) > address_max:
+    if len(args) > MAX_ADDRESSES:
         # Raise here. The Verify API will not return an error. It will
         # just return the first 5 results
         raise ValueError(
-            'Only {address_max} addresses are allowed per '
+            'Only {max_addresses} addresses are allowed per '
             'request'.format(
-                address_max=address_max,
+                max_addresses=MAX_ADDRESSES,
                 )
             )
 
